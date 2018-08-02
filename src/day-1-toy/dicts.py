@@ -21,9 +21,14 @@ waypoints = [
         "lat": 43,
         "lon": -122,
         "name": "a third place"
+    },
+    {
+        "lat": 42,
+        "lon": -333,
+        "name": "a new world"
     }
 ]
 
 # Write a loop that prints out all the field values for all the waypoints
-
+print([key for key in waypoints])
 # Add a new waypoint to the list
