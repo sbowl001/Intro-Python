@@ -30,5 +30,9 @@ waypoints = [
 ]
 
 # Write a loop that prints out all the field values for all the waypoints
-print([key for key in waypoints])
+# print([key for key in waypoints])
+for i in waypoints: 
+    print(i["lat"])
+    print(i["lon"])
+    print(i["name"])
 # Add a new waypoint to the list
