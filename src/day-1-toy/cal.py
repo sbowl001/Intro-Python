@@ -14,3 +14,20 @@
 # docs for the calendar module closely.
 
 import sys
+import calendar
+import datetime 
+
+month = sys.argv[1]
+year = sys.argv[2]
+print(str(month) + ", " + str(year))
+if month == None:
+    month = 8
+
+if year == None: 
+    year = 2018
+
+myCal = calendar.TextCalendar()
+print( myCal.formatmonth( int(year), int(month)))
+
+
+
