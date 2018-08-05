@@ -19,6 +19,7 @@ import datetime
 
 month = sys.argv[1]
 year = sys.argv[2]
+
 print(str(month) + ", " + str(year))
 if month == None:
     month = 8
@@ -28,6 +29,23 @@ if year == None:
 
 myCal = calendar.TextCalendar()
 print( myCal.formatmonth( int(year), int(month)))
+
+
+# current = datetime.datetime.now()
+# cal = calendar.TextCalendar()
+
+# year = input("Enter 4 Digit Year: ")
+# month = input("Enter Month 1 - 12: ")
+
+# if len(sys.argv) == 3:
+#   year = int(sys.argv[1])
+#   month = int(sys.argv[2])
+#   print(cal.formatmonth(int(year), int(month)))
+# else:
+#   year = current.year
+#   month = current.month
+#   print(cal.formatmonth(int(year), int(month)))
+
 
 
 
