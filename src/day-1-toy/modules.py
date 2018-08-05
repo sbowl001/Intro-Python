@@ -7,13 +7,16 @@ import os
 
 # Print out the command line arguments in sys.argv, one per line:
 
-print(sys.argv[0])
+# print(sys.argv[0])
+for arg in sys.argv:
+    print(arg)
 
 # Print out the plaform from sys:
 print(sys.platform)
 
 # Print out the Python version from sys:
-print(sys.version_info)
+# print(sys.version_info)
+print(sys.version)
 
 
 
