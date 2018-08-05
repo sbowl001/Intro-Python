@@ -30,3 +30,4 @@ y = [int(i) for i in x if int(i) %2 == 0]
 
 print(y)
 
+# or y = [int(num) for num in x if int(num) %2 == 0]
