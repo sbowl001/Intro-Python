@@ -1,49 +1,49 @@
 from room import Room
 from player import Player
-
+from item import Item
 # Declare all the rooms
 
 room = {
     'village':  Room("Village Hidden in the Spring",
-                     "The noise of bustling streets warm your heart"),
+                     "The noise of bustling streets warms your heart", []),
 
     'home':    Room("Home Sweet Home", """Dim light filters in from the south. Dusty
-passages run north and east."""),
+passages run north and east.""", []),
 
     'attic': Room("Attic Room", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
-the distance, but there is no way across the chasm."""),
+the distance, but there is no way across the chasm.""", []),
 
     'forest':   Room("Grand Forest", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", []),
 
-   'overlook':   Room("Mountain Overlook", """A steep mountain appears before you. The forest expands in all directions. Perhaps a further look is needed..."""),
+   'overlook':   Room("Mountain Overlook", """A steep mountain appears before you. The forest expands in all directions. Perhaps a further look is needed...""", []),
 
-   'peak':   Room("Mountain Peak", """The fresh air soothes your senses, the forest expanse looks peaceful. The village looks minute in the distance."""),
+   'peak':   Room("Mountain Peak", """The fresh air soothes your senses, the forest expanse looks peaceful. The village looks minute in the distance.""", []),
 
-   'cave':   Room("North Cave", """Creaking sounds resonate throughout the cave."""),
+   'cave':   Room("North Cave", """Creaking sounds resonate throughout the cave.""", []),
 
    'underground1':   Room("Underground Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", []),
 
    'tunnels':   Room("Dark Tunnels", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", []),
 
-   'secret':   Room("Secret Passage", """The passage holds an air of mystery. The walls glimmer with something hidden beneath."""),
+   'secret':   Room("Secret Passage", """The passage holds an air of mystery. The walls glimmer with something hidden beneath.""", []),
 
-   'epic':   Room("Epic Treasure", """The room contains the most special of treasure chests. Open it to reveal your prize."""),
+   'epic':   Room("Epic Treasure", """The room contains the most special of treasure chests. Open it to reveal your prize.""", []),
 
-   'underground2':   Room("Damp Underground Passage", """Moist droplets of water fall from the passage's crevices."""),
+   'underground2':   Room("Damp Underground Passage", """Moist droplets of water fall from the passage's crevices.""", []),
 
     'dragon': Room("Dragon Lair", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south."""),
+earlier adventurers. The only exit is to the south.""", []),
 
    'swamp':   Room("Sinister Swamp", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", []),
 
    'mangroves':   Room("Mangrove Forest", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+to north. The smell of gold permeates the air.""", []),
 }
 
 
@@ -83,45 +83,46 @@ room['mangroves'].s_to = room['swamp']
 
 # Make a new player object that is currently in the 'outside' room.
 
-newplayer = Player(room['village'])
-dir = ''
+newplayer = Player(room['village'], [])
+cmd = ""
 # Write a loop that:
 #
-while not dir == "q":
+while not cmd == "q":
     print(newplayer.room.name)
 # * Prints the current room name
     print(newplayer.room.description)
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
-    dir = input("\n Please choose a direction...n, s, e, w, OR q to quit the game.\n ")
+    newplayer.room.view_items()
+    cmd = input("\n Please choose a direction...n, s, e, w, OR q to quit the game.\n ")
 #
 # If the user enters a cardinal direction, attempt to move to the room there.
-    if dir == "n":
+    if cmd == "n":
         if hasattr(newplayer.room, "n_to"):
             newplayer.room = newplayer.room.n_to
         else: 
             print("Sorry, you've hit a wall")
-    elif dir == "s":
+    elif cmd == "s":
         if hasattr(newplayer.room, "s_to"):
             newplayer.room = newplayer.room.s_to
         else: 
             print("Sorry, you've hit a wall")
-    elif dir == "w":
+    elif cmd == "w":
         if hasattr(newplayer.room, "w_to"):
             newplayer.room = newplayer.room.w_to
         else: 
             print("Sorry, you've hit a wall")
-    elif dir == "e":
+    elif cmd == "e":
         if hasattr(newplayer.room, "e_to"):
             newplayer.room = newplayer.room.e_to
         else: 
             print("Sorry, you've hit a wall")
-    elif dir == "u":
+    elif cmd == "u":
         if hasattr(newplayer.room, "u_to"):
             newplayer.room = newplayer.room.u_to
         else:
             print("Sorry, you've hit a wall")
-    elif dir == "d":
+    elif cmd == "d":
         if hasattr(newplayer.room, "d_to" ):
             newplayer.room = newplayer.room.d_to
         else: 
@@ -129,7 +130,7 @@ while not dir == "q":
 # Print an error message if the movement isn't allowed.
 #
 # If the user enters "q", quit the game.
-    elif dir == "q":
+    elif cmd == "q":
         print("Thank you for playing!")
     else:
         print("\nInvalid selection.")
