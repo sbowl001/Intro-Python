@@ -5,7 +5,7 @@ from player import Player
 
 room = {
     'village':  Room("Village Hidden in the Spring",
-                     "North of you, the cave mount beckons"),
+                     "The noise of bustling streets warm your heart"),
 
     'home':    Room("Home Sweet Home", """Dim light filters in from the south. Dusty
 passages run north and east."""),
@@ -21,8 +21,7 @@ to north. The smell of gold permeates the air."""),
 
    'peak':   Room("Mountain Peak", """The fresh air soothes your senses, the forest expanse looks peaceful. The village looks minute in the distance."""),
 
-   'cave':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air."""),
+   'cave':   Room("North Cave", """Creaking sounds resonate throughout the cave."""),
 
    'underground1':   Room("Underground Passage", """The narrow passage bends here from west
 to north. The smell of gold permeates the air."""),
@@ -84,7 +83,7 @@ room['mangroves'].s_to = room['swamp']
 
 # Make a new player object that is currently in the 'outside' room.
 
-newplayer = Player(room['outside'])
+newplayer = Player(room['village'])
 dir = ''
 # Write a loop that:
 #
@@ -115,6 +114,16 @@ while not dir == "q":
     elif dir == "e":
         if hasattr(newplayer.room, "e_to"):
             newplayer.room = newplayer.room.e_to
+        else: 
+            print("Sorry, you've hit a wall")
+    elif dir == "u":
+        if hasattr(newplayer.room, "u_to"):
+            newplayer.room = newplayer.room.u_to
+        else:
+            print("Sorry, you've hit a wall")
+    elif dir == "d":
+        if hasattr(newplayer.room, "d_to" ):
+            newplayer.room = newplayer.room.d_to
         else: 
             print("Sorry, you've hit a wall")
 # Print an error message if the movement isn't allowed.
