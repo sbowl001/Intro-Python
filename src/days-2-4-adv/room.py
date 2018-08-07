@@ -11,4 +11,5 @@ class Room:
             print( " none")
         else: 
             for i in self.items:
-                print("\t" + i)
+                # print("\t" + i.name)
+                print( "  " + str(i))

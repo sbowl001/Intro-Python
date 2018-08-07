@@ -8,7 +8,7 @@ room = {
                      "The noise of bustling streets warms your heart", []),
 
     'home':    Room("Home Sweet Home", """Dim light filters in from the south. Dusty
-passages run north and east.""", []),
+passages run north and east.""", [Item("Meal", "This item restores your health.")]),
 
     'attic': Room("Attic Room", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
@@ -94,43 +94,76 @@ while not cmd == "q":
 # * Prints the current description (the textwrap module might be useful here).
 # * Waits for user input and decides what to do.
     newplayer.room.view_items()
-    cmd = input("\n Please choose a direction...n, s, e, w, OR q to quit the game.\n ")
+    cmd = input("\n Please choose a direction...n, s, e, w, OR q to quit the game.\n ").lower()
 #
+    parsed_cmd = cmd.split()
+    if len(parsed_cmd) > 1:
+        action = parsed_cmd[0]
+        item = ""
+        for i in range(1, len(parsed_cmd)):
+            item += parsed_cmd[i] + " "  
+        item = item.strip()#confused
+        
+        if action == "g" or action == "grab":
+            for i in newplayer.room.items:
+                    print(i)
+            for i in newplayer.room.items:
+                if parsed_cmd[i] == i.name:
+                    print("\n...grabbing" +".")
+                    newplayer.room.items.remove(i)
+                    newplayer.items.append(i)
+                else: 
+                    print("\nitem not available to grab")
+            for i in newplayer.room.items:
+                print("after")
+                print(i)
+        elif action == "d" or action == "drop":
+            if item in newplayer.items:
+                print("...dropping" + item + ".")
+                newplayer.items.remove(item)
+                newplayer.room.items.append(item)
+            else:
+                print("item not available to drop!")
+        elif cmd == "i" or cmd =="inventory":
+            print("Inventory: ")
+            for i in newplayer.items:
+                print("\t" + i)
+    else: #parsed_cmd length =1
 # If the user enters a cardinal direction, attempt to move to the room there.
-    if cmd == "n":
-        if hasattr(newplayer.room, "n_to"):
-            newplayer.room = newplayer.room.n_to
-        else: 
-            print("Sorry, you've hit a wall")
-    elif cmd == "s":
-        if hasattr(newplayer.room, "s_to"):
-            newplayer.room = newplayer.room.s_to
-        else: 
-            print("Sorry, you've hit a wall")
-    elif cmd == "w":
-        if hasattr(newplayer.room, "w_to"):
-            newplayer.room = newplayer.room.w_to
-        else: 
-            print("Sorry, you've hit a wall")
-    elif cmd == "e":
-        if hasattr(newplayer.room, "e_to"):
-            newplayer.room = newplayer.room.e_to
-        else: 
-            print("Sorry, you've hit a wall")
-    elif cmd == "u":
-        if hasattr(newplayer.room, "u_to"):
-            newplayer.room = newplayer.room.u_to
+        if cmd == "n":
+            if hasattr(newplayer.room, "n_to"):
+                newplayer.room = newplayer.room.n_to
+            else: 
+                print("Sorry, you've hit a wall")
+        elif cmd == "s":
+            if hasattr(newplayer.room, "s_to"):
+                newplayer.room = newplayer.room.s_to
+            else: 
+                print("Sorry, you've hit a wall")
+        elif cmd == "w":
+            if hasattr(newplayer.room, "w_to"):
+                newplayer.room = newplayer.room.w_to
+            else: 
+                print("Sorry, you've hit a wall")
+        elif cmd == "e":
+            if hasattr(newplayer.room, "e_to"):
+                newplayer.room = newplayer.room.e_to
+            else: 
+                print("Sorry, you've hit a wall")
+        elif cmd == "u":
+            if hasattr(newplayer.room, "u_to"):
+                newplayer.room = newplayer.room.u_to
+            else:
+                print("Sorry, you've hit a wall")
+        elif cmd == "d":
+            if hasattr(newplayer.room, "d_to" ):
+                newplayer.room = newplayer.room.d_to
+            else: 
+                print("Sorry, you've hit a wall")
+    # Print an error message if the movement isn't allowed.
+    #
+    # If the user enters "q", quit the game.
+        elif cmd == "q":
+            print("Thank you for playing!")
         else:
-            print("Sorry, you've hit a wall")
-    elif cmd == "d":
-        if hasattr(newplayer.room, "d_to" ):
-            newplayer.room = newplayer.room.d_to
-        else: 
-            print("Sorry, you've hit a wall")
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
-    elif cmd == "q":
-        print("Thank you for playing!")
-    else:
-        print("\nInvalid selection.")
+            print("\nInvalid selection.")
