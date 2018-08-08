@@ -130,10 +130,10 @@ while not cmd == "q":
                 newplayer.room.items.append(item)
             else:
                 print("item not available to drop!")
-        elif cmd == "i" or cmd =="inventory":
+        elif action == "i" or action =="inventory":
             print("Inventory: ")
-            for i in newplayer.items:
-                print("\t" + i)
+            for item in newplayer.items:
+                print("\t" + item)
     else: #parsed_cmd length =1
 # If the user enters a cardinal direction, attempt to move to the room there.
         if cmd == "n":
