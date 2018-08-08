@@ -127,13 +127,15 @@ while not cmd == "q":
             if item in newplayer.items:
                 print("\t...dropping .")
                 newplayer.items.remove(item)
-                newplayer.room.items.append(item)
+                newplayer.room.items.append(item.capitalize())   #bug - cannot pick and drop multiple times
             else:
                 print("item not available to drop!")
-        elif action == "i" or action =="inventory":
-            print("Inventory: ")
-            for item in newplayer.items:
-                print("\t" + item)
+        # i does not work if it's here, but works down?
+        # elif action == "i" or action =="inventory":
+        #     print("Inventory: ")
+        #     # for item in newplayer.items:
+        #     print("\t" + str(newplayer.items))  
+
     else: #parsed_cmd length =1
 # If the user enters a cardinal direction, attempt to move to the room there.
         if cmd == "n":
@@ -141,6 +143,10 @@ while not cmd == "q":
                 newplayer.room = newplayer.room.n_to
             else: 
                 print("Sorry, you've hit a wall")
+        elif cmd == "i" or cmd =="inventory":
+            print("Inventory: ")
+            for item in newplayer.items:
+                print("\t" + item.capitalize())
         elif cmd == "s":
             if hasattr(newplayer.room, "s_to"):
                 newplayer.room = newplayer.room.s_to
