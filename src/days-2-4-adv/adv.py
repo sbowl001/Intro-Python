@@ -102,24 +102,30 @@ while not cmd == "q":
         item = ""
         for i in range(1, len(parsed_cmd)):
             item += parsed_cmd[i] + " "  
-        item = item.strip()#confused
-        
+        item = item.strip()# array of commands
+
+
         if action == "g" or action == "grab":
+            # for i in newplayer.room.items:
+            #         print("-->", i.name.lower() == parsed_cmd[1])
+            # print(parsed_cmd[1])
             for i in newplayer.room.items:
-                    print(i)
-            for i in newplayer.room.items:
-                if parsed_cmd[i] == i.name:
+                print(i)
+                if i.name.lower() == parsed_cmd[1]:
                     print("\n...grabbing" +".")
+                    print(i)
                     newplayer.room.items.remove(i)
-                    newplayer.items.append(i)
+                    newplayer.items.append(i.name.lower())
+                    # print("player items", newplayer.items[0].name)
+                    print("player items", newplayer.items[0])
                 else: 
                     print("\nitem not available to grab")
             for i in newplayer.room.items:
-                print("after")
-                print(i)
+                print("after", i)
         elif action == "d" or action == "drop":
+            print("checked", item, newplayer.items[0])
             if item in newplayer.items:
-                print("...dropping" + item + ".")
+                print("\t...dropping .")
                 newplayer.items.remove(item)
                 newplayer.room.items.append(item)
             else:
