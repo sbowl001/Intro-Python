@@ -19,8 +19,8 @@ import datetime
 
 month = sys.argv[1]
 year = sys.argv[2]
-
 print(str(month) + ", " + str(year))
+
 if month == None:
     month = 8
 
