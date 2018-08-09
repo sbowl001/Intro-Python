@@ -1,7 +1,8 @@
 from room import Room
 from player import Player
 from item import Item
-import crayons
+
+# import crayons
 # Declare all the rooms
 
 room = {
@@ -87,7 +88,7 @@ room['mangroves'].s_to = room['swamp']
 name = input('Enter your name: ')
 newplayer = Player(name, room['village'], [])
 cmd = ""
-print(crayons.green(f'\n \t Welcome, {newplayer.name}!\n'))
+print(f'\n \t Welcome, {newplayer.name}!\n') #crayons.green(
 # Write a loop that:
 #
 while not cmd == "q":
@@ -142,9 +143,12 @@ while not cmd == "q":
             else: 
                 print("Sorry, you can't go that way")
         elif cmd == "i" or cmd =="inventory":
-            print("Inventory: ")
-            for item in newplayer.items:
-                print("\t" + item.capitalize())
+            if len(newplayer.items) == 0:
+                print("Inventory is empty")
+            else: 
+                print("You are carrying: \n")
+                for item in newplayer.items:
+                    print("\t" + item.capitalize())
         elif cmd == "s":
             if hasattr(newplayer.room, "s_to"):
                 newplayer.room = newplayer.room.s_to
