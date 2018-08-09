@@ -110,30 +110,34 @@ while not cmd == "q":
 
 
         if action == "g" or action == "grab":
-            # for i in newplayer.room.items:
-            #         print("-->", i.name.lower() == parsed_cmd[1])
-            # print(parsed_cmd[1])
             for i in newplayer.room.items:
-                print(i)
                 if i.name.lower() == parsed_cmd[1]:
                     print("\n...grabbing" +".")
                     print(i)
                     newplayer.room.items.remove(i)
-                    newplayer.items.append(i.name.lower())
+                    newplayer.items.append(i)
                     # print("player items", newplayer.items[0].name)
                     print("player items", newplayer.items[0])
+                # if i.name.lower() == parsed_cmd[1]:
+                #     print("\n...grabbing" +".")
+                #     print(i)
+                #     newplayer.room.items.remove(i)
+                #     newplayer.items.append(i.name.lower())
+                #     # print("player items", newplayer.items[0].name)
+                #     print("player items", newplayer.items[0])
                 else: 
                     print("\nitem not available to grab")
             for i in newplayer.room.items:
-                print("after", i)
+                print("after", i.name)
         elif action == "d" or action == "drop":
-            print("checked", item, newplayer.items[0])
-            if item in newplayer.items:
-                print("\t...dropping .")
-                newplayer.items.remove(item)
-                newplayer.room.items.append(item.capitalize())   #bug - cannot pick and drop multiple times
-            else:
-                print("item not available to drop!")
+            print("checked", i, newplayer.items[0])
+            for i in newplayer.items:
+                if i.name.lower() == parsed_cmd[1]:
+                     print("\t...dropping .")
+                     newplayer.items.remove(i)
+                     newplayer.room.items.append(i)   #bug - cannot pick and drop multiple times
+                else:
+                    print("item not available to drop!")
 
     else: #parsed_cmd length =1
 # If the user enters a cardinal direction, attempt to move to the room there.
@@ -148,7 +152,7 @@ while not cmd == "q":
             else: 
                 print("You are carrying: \n")
                 for item in newplayer.items:
-                    print("\t" + item.capitalize())
+                    print("\t" + str(item))
         elif cmd == "s":
             if hasattr(newplayer.room, "s_to"):
                 newplayer.room = newplayer.room.s_to
