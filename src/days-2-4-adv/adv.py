@@ -1,6 +1,7 @@
 from room import Room
 from player import Player
 from item import Item
+import crayons
 # Declare all the rooms
 
 room = {
@@ -83,8 +84,10 @@ room['mangroves'].s_to = room['swamp']
 
 # Make a new player object that is currently in the 'outside' room.
 
-newplayer = Player(room['village'], [])
+name = input('Enter your name: ')
+newplayer = Player(name, room['village'], [])
 cmd = ""
+print(crayons.green(f'\n \t Welcome, {newplayer.name}!\n'))
 # Write a loop that:
 #
 while not cmd == "q":
@@ -130,11 +133,6 @@ while not cmd == "q":
                 newplayer.room.items.append(item.capitalize())   #bug - cannot pick and drop multiple times
             else:
                 print("item not available to drop!")
-        # i does not work if it's here, but works down?
-        # elif action == "i" or action =="inventory":
-        #     print("Inventory: ")
-        #     # for item in newplayer.items:
-        #     print("\t" + str(newplayer.items))  
 
     else: #parsed_cmd length =1
 # If the user enters a cardinal direction, attempt to move to the room there.
@@ -142,7 +140,7 @@ while not cmd == "q":
             if hasattr(newplayer.room, "n_to"):
                 newplayer.room = newplayer.room.n_to
             else: 
-                print("Sorry, you've hit a wall")
+                print("Sorry, you can't go that way")
         elif cmd == "i" or cmd =="inventory":
             print("Inventory: ")
             for item in newplayer.items:
@@ -151,27 +149,27 @@ while not cmd == "q":
             if hasattr(newplayer.room, "s_to"):
                 newplayer.room = newplayer.room.s_to
             else: 
-                print("Sorry, you've hit a wall")
+                print("Sorry, you can't go that way")
         elif cmd == "w":
             if hasattr(newplayer.room, "w_to"):
                 newplayer.room = newplayer.room.w_to
             else: 
-                print("Sorry, you've hit a wall")
+                print("Sorry, you can't go that way")
         elif cmd == "e":
             if hasattr(newplayer.room, "e_to"):
                 newplayer.room = newplayer.room.e_to
             else: 
-                print("Sorry, you've hit a wall")
+                print("Sorry, you can't go that way")
         elif cmd == "u":
             if hasattr(newplayer.room, "u_to"):
                 newplayer.room = newplayer.room.u_to
             else:
-                print("Sorry, you've hit a wall")
+                print("Sorry, you can't go that way")
         elif cmd == "d":
             if hasattr(newplayer.room, "d_to" ):
                 newplayer.room = newplayer.room.d_to
             else: 
-                print("Sorry, you've hit a wall")
+                print("Sorry, you can't go that way")
     # Print an error message if the movement isn't allowed.
     #
     # If the user enters "q", quit the game.
