@@ -1,8 +1,8 @@
 from room import Room
 from player import Player
-from item import Item
+from item import Item, Treasure
 
-# import crayons
+import crayons
 # Declare all the rooms
 
 room = {
@@ -88,7 +88,9 @@ room['mangroves'].s_to = room['swamp']
 name = input('Enter your name: ')
 newplayer = Player(name, room['village'], [])
 cmd = ""
-print(f'\n \t Welcome, {newplayer.name}!\n') #crayons.green(
+print(crayons.green(f'\n \t Welcome, {newplayer.name}!\n')) #crayons.green(
+
+
 # Write a loop that:
 #
 while not cmd == "q":
@@ -116,15 +118,9 @@ while not cmd == "q":
                     print(i)
                     newplayer.room.items.remove(i)
                     newplayer.items.append(i)
+                    newplayer.score += i.value
                     # print("player items", newplayer.items[0].name)
                     print("player items", newplayer.items[0])
-                # if i.name.lower() == parsed_cmd[1]:
-                #     print("\n...grabbing" +".")
-                #     print(i)
-                #     newplayer.room.items.remove(i)
-                #     newplayer.items.append(i.name.lower())
-                #     # print("player items", newplayer.items[0].name)
-                #     print("player items", newplayer.items[0])
                 else: 
                     print("\nitem not available to grab")
             for i in newplayer.room.items:
@@ -135,7 +131,7 @@ while not cmd == "q":
                 if i.name.lower() == parsed_cmd[1]:
                      print("\t...dropping .")
                      newplayer.items.remove(i)
-                     newplayer.room.items.append(i)   #bug - cannot pick and drop multiple times
+                     newplayer.room.items.append(i)   
                 else:
                     print("item not available to drop!")
 
@@ -146,6 +142,11 @@ while not cmd == "q":
                 newplayer.room = newplayer.room.n_to
             else: 
                 print("Sorry, you can't go that way")
+        elif cmd == "score":
+            # cmd = input( f'Score: {newplayer.score} \n')
+            print( f'Score: {newplayer.score} \n')
+        # elif cmd == "?"
+        #     cmd = print_help()
         elif cmd == "i" or cmd =="inventory":
             if len(newplayer.items) == 0:
                 print("Inventory is empty")

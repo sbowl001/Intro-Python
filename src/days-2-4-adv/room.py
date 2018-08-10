@@ -8,8 +8,8 @@ class Room:
     def view_items(self):
         print("Items found in this room: ")
         if len(self.items) == 0:
-            print( " none")
+            print( "\n \t none")
         else: 
             for i in self.items:
                 # print("\t" + i.name)
-                print( "  " + str(i))
+                print( "\t  " + str(i))
