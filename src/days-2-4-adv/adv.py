@@ -7,7 +7,7 @@ import crayons
 
 room = {
     'village':  Room("Village Hidden in the Spring",
-                     "The noise of bustling streets warms your heart", []),
+                     "The noise of bustling streets warms your heart", [Treasure("Coin", "Starting money, how lucky!", 10)]),
 
     'home':    Room("Home Sweet Home", """Dim light filters in from the south. Dusty
 passages run north and east.""", [Item("Meal", "This item restores your health.")]),
@@ -90,6 +90,9 @@ newplayer = Player(name, room['village'], [])
 cmd = ""
 print(crayons.green(f'\n \t Welcome, {newplayer.name}!\n')) #crayons.green(
 
+# print_room_info()
+# print()
+# cmd = print_help()
 
 # Write a loop that:
 #
@@ -114,11 +117,15 @@ while not cmd == "q":
         if action == "g" or action == "grab":
             for i in newplayer.room.items:
                 if i.name.lower() == parsed_cmd[1]:
-                    print("\n...grabbing" +".")
-                    print(i)
-                    newplayer.room.items.remove(i)
-                    newplayer.items.append(i)
-                    newplayer.score += i.value
+                    i.grab_item(newplayer)
+
+                    # if i.picked_up == False:
+                    #     newplayer.score += i.value 
+                    # print("\n...grabbing" +".")
+                    # print(i)
+                    # newplayer.room.items.remove(i)
+                    # newplayer.items.append(i)
+                    # newplayer.score += i.value
                     # print("player items", newplayer.items[0].name)
                     print("player items", newplayer.items[0])
                 else: 
