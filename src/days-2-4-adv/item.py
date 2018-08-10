@@ -1,3 +1,5 @@
+import crayons
+
 class Item: 
     def __init__(self, name, description):
         self.name = name
@@ -7,7 +9,7 @@ class Item:
         return self.name + ": " + self.description
 
     def grab_item(self, newplayer):
-        print("\n...grabbing" +".")
+        print(crayons.blue("\n...grabbing" +"."))
         newplayer.room.items.remove(self)
         newplayer.items.append(self)
 
