@@ -1,6 +1,6 @@
 from room import Room
 from player import Player
-from item import Item, Treasure
+from item import Item, Treasure, LightSource
 
 import crayons
 # Declare all the rooms
@@ -118,9 +118,6 @@ while not cmd == "q":
             for i in newplayer.room.items:
                 if i.name.lower() == parsed_cmd[1]:
                     i.grab_item(newplayer)
-
-                    # if i.picked_up == False:
-                    #     newplayer.score += i.value 
                     # print("\n...grabbing" +".")
                     # print(i)
                     # newplayer.room.items.remove(i)
